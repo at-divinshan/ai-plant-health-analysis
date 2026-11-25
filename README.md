@@ -16,6 +16,22 @@ npm install
 npm run dev
 Open http://localhost:5173
 
+## GitHub Pages deployment
+
+The frontend is deployed from `frontend/dist` by the GitHub Actions workflow
+when changes are pushed to `main`. In the repository, select **Settings →
+Pages → Build and deployment → Source: GitHub Actions**. The Vite build uses
+the `/ai-plant-health-analysis/` base path for the project site.
+
+GitHub Pages hosts only the static frontend; it does not host the Python API,
+Gemini service, or MySQL database. Analysis, saved database records, people,
+and sharing features require the backend and database to be hosted separately.
+After deploying the backend, set the repository Actions variable `VITE_API_URL`
+to its public API base URL (for example, `https://api.example.com`) and
+configure the backend's CORS policy to allow
+`https://at-divinshan.github.io`. Keep backend credentials and database secrets
+on the backend; Vite variables are included in the public frontend build.
+
 ## MySQL storage and people
 
 The backend reads `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD`
